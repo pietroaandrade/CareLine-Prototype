@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@theme {
+    --color-careline-blue:  #47b7ff; 
+  }
+
