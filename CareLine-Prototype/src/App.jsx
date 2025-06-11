@@ -3,10 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import QueueManagement from './components/Dashboard/QueueManagement';
 import PatientsOverview from './components/Dashboard/PatientsOverview';
-import Chat from './components/Chat/Chat'; // Placeholder for Chat component
+
 
 function App() {
-  // Centralized patient state and functions (moved from previous App.jsx but not explicitly used in this structure yet)
   const [patients, setPatients] = useState({});
   const [nextId, setNextId] = useState(1);
   const [commonWaitList, setCommonWaitList] = useState([]);
@@ -21,6 +20,9 @@ function App() {
       const newPatient = {
           id,
           name: patientData.name,
+          email: patientData.email,
+          phone: patientData.phone,
+          address: patientData.address,
           insurance: patientData.insurance,
           symptoms: patientData.symptoms,
           temperature: patientData.temperature,
@@ -80,12 +82,11 @@ function App() {
   return (
     <Router>
       <div className="flex h-screen bg-gray-100">
-        <Navbar /> {/* Navbar remains as a fixed sidebar */}
+        <Navbar /> 
         <main className="flex-1 p-4 overflow-y-auto">
           <Routes>
-            <Route path="/" element={<h1>Welcome to CareLine! Please select a view from the Navbar.</h1>} />
             <Route
-              path="/dashboard"
+              path="/"
               element={
                 <QueueManagement
                   patients={patients}
@@ -113,8 +114,7 @@ function App() {
                 />
               }
             />
-            <Route path="/chat" element={<Chat />} />
-            {/* Add more routes for reports, system, etc. */}
+            
           </Routes>
         </main>
       </div>

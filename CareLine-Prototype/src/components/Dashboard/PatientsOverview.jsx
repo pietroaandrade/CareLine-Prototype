@@ -8,8 +8,15 @@ export default function PatientsOverview({ patients, selectedPatientId, onViewDe
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredPatients, setFilteredPatients] = useState([]);
 
+    
+    const dicebearNames = [
+        "Valentina", "Aiden", "Alexander", "Jameson", "Leah", "Jessica", 
+        "Avery", "Caleb", "Jocelyn", "Wyatt", "Maria", "Christopher", 
+        "Sarah", "Jude", "Chase", "Nolan"
+    ];
+
     useEffect(() => {
-        // Filter patients based on search term
+       
         const patientArray = Object.values(patients);
         const filtered = patientArray.filter(patient =>
             patient.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -43,9 +50,13 @@ export default function PatientsOverview({ patients, selectedPatientId, onViewDe
 
     return (
         <div className="flex-1 p-6 bg-gray-100 min-h-screen">
-            {/* Header with Search Bar */}
+           
             <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-semibold text-gray-800">Informação dos Pacientes</h1>
+                <div className="inline-block">
+                    <h1 className="text-2xl font-semibold text-gray-800">Informação dos Pacientes</h1>
+                    <p>Busque, encontre e adicione informações e relatórios dos seus pacientes </p>
+                </div>
+                
                 <div className="relative">
                     <input
                         type="text"
@@ -58,16 +69,16 @@ export default function PatientsOverview({ patients, selectedPatientId, onViewDe
                         className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
                         width="20" height="20" fill="currentColor" viewBox="0 0 20 20"
                     >
-                        <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+                        <path d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
                     </svg>
                 </div>
             </div>
 
-            {/* Patient List and Patient Details Section */}
+            
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Patient List Column */}
+                
                 <div className="md:col-span-1 bg-white p-6 rounded-lg shadow-md overflow-y-auto max-h-[calc(100vh-180px)]">
-                    <h2 className="text-xl font-semibold mb-4">All Patients ({Object.keys(patients).length})</h2>
+                    <h2 className="text-xl font-semibold mb-4">Todos os Pacientes ({Object.keys(patients).length})</h2>
                     <ul>
                         {filteredPatients.length > 0 ? (filteredPatients.map(patient => (
                             <li
@@ -75,84 +86,86 @@ export default function PatientsOverview({ patients, selectedPatientId, onViewDe
                                 className={`p-2 border-b cursor-pointer hover:bg-gray-100 ${selectedPatientId === patient.id ? 'bg-careline-blue text-white hover:bg-careline-blue' : ''}`}
                                 onClick={() => onViewDetails(patient.id)}
                             >
-                                ID: {patient.id}, Name: {patient.name}
+                                ID: {patient.id}, Nome: {patient.name}
                             </li>
                         ))) : (
-                            <p className="text-gray-500">No patients found. Add a patient in the Dashboard view.</p>
+                            <p className="text-gray-500">Nenhum paciente encontrado. Adicione um paciente na visualização do Painel de Controle.</p>
                         )}
                     </ul>
                 </div>
 
-                {/* Patient Details and Report Section (takes 2/3 columns) */}
+                
                 <div className="md:col-span-2 space-y-6">
-                    {/* Patient Details Card */}
                     {currentPatient ? (
                         <div className="bg-white p-6 rounded-lg shadow-md">
                             <h2 className="text-xl font-semibold mb-4">{currentPatient.name} (ID: {currentPatient.id})</h2>
                             <div className="flex flex-wrap items-center space-x-8 mb-4">
-                                <img src="https://via.placeholder.com/80" alt="Patient Avatar" className="rounded-full h-20 w-20" />
+                                <img src={`https://api.dicebear.com/9.x/notionists/svg?seed=${dicebearNames[currentPatient.id % dicebearNames.length]}`}
+                                    alt="Avatar do Paciente" 
+                                    className="rounded-full h-20 w-20" 
+                                />
                                 <div className="flex-1">
                                     <p className="text-gray-600 text-sm">Email:</p>
-                                    <p className="font-medium">junior_santos@example.com</p> {/* Placeholder for email */}
+                                    <p className="font-medium">{currentPatient.email}</p>
                                 </div>
                                 <div className="flex-1">
-                                    <p className="text-gray-600 text-sm">Phone Number:</p>
-                                    <p className="font-medium">(11) 99473-1578</p> {/* Placeholder for phone */}
+                                    <p className="text-gray-600 text-sm">Número de Telefone:</p>
+                                    <p className="font-medium">{currentPatient.phone}</p>
                                 </div>
                                 <div className="flex-1">
-                                    <p className="text-gray-600 text-sm">Address:</p>
-                                    <p className="font-medium">Rua Pedro Dos Ramos 321 - Itapetinga</p> {/* Placeholder for address */}
+                                    <p className="text-gray-600 text-sm">Endereço:</p>
+                                    <p className="font-medium">{currentPatient.address}</p>
                                 </div>
                             </div>
                             <div className="flex flex-wrap items-center space-x-8 mb-4">
                                 <div>
-                                    <p className="text-gray-600 text-sm">Insurance:</p>
+                                    <p className="text-gray-600 text-sm">Convênio:</p>
                                     <p className="font-medium">{currentPatient.insurance}</p>
                                 </div>
                                 <div>
-                                    <p className="text-gray-600 text-sm">Symptoms:</p>
+                                    <p className="text-gray-600 text-sm">Sintomas:</p>
                                     <p className="font-medium">{currentPatient.symptoms}</p>
                                 </div>
                                 <div>
-                                    <p className="text-gray-600 text-sm">Temperature:</p>
+                                    <p className="text-gray-600 text-sm">Temperatura:</p>
                                     <p className="font-medium">{currentPatient.temperature}°C</p>
                                 </div>
                             </div>
                         </div>
                     ) : (
                         <div className="bg-white p-6 rounded-lg shadow-md">
-                            <p className="text-gray-600">Please select a patient from the list or create a new one in the Dashboard view.</p>
+                            <p className="text-gray-600">Por favor, selecione um paciente da lista ou crie um novo na visualização do Painel de Controle.</p>
                         </div>
                     )}
 
-                    {/* Information Cards (Sintomas, Seguro Saúde, Extras) */}
+                    
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {/* Sintomas Card */}
+                        
                         <InfoCard
                             icon="+"
                             title="Sintomas"
                             description={currentPatient ? currentPatient.symptoms : "Sintomas do paciente, queixas e sinais vitais"}
                             showArrow={true}
                         />
-                        {/* Seguro Saúde Card */}
+                        
                         <InfoCard
                             icon="🏥"
-                            title="Seguro Saúde"
-                            description={currentPatient ? currentPatient.insurance : "Seguro de saúde, contato e formulários"}
+                            title="Convênio"
+                            description={currentPatient ? currentPatient.insurance : "Informações do convênio, contato e formulários"}
                             showArrow={true}
                         />
-                        {/* Extras Card */}
+                        
                         <InfoCard
                             icon="📄"
                             title="Extras"
-                            description="Histórico de visitas, alergias, observações médicas"
+                            description="Histórico de visitas, alergias, observações médicas e informações adicionais"
                             showArrow={true}
                         />
                     </div>
 
-                    {/* Preencher Laudo Section */}
+                    
                     <div className="bg-white p-6 rounded-lg shadow-md">
-                        <h2 className="text-xl font-semibold mb-4">Preencher laudo</h2>
+                        <h2 className="text-xl font-semibold mb-4">Preencher Laudo</h2>
                         <form onSubmit={handleReportSubmit} className="space-y-4">
                             <div>
                                 <label className="block text-gray-700 text-sm font-bold mb-2">Descrição Clínica:</label>
@@ -160,7 +173,7 @@ export default function PatientsOverview({ patients, selectedPatientId, onViewDe
                                     value={laudo}
                                     onChange={(e) => setLaudo(e.target.value)}
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    placeholder="Digete aqui a descrição clínica..."
+                                    placeholder="Digite aqui a descrição clínica..."
                                 ></textarea>
                             </div>
                             <div>
@@ -169,16 +182,16 @@ export default function PatientsOverview({ patients, selectedPatientId, onViewDe
                                     value={receita}
                                     onChange={(e) => setReceita(e.target.value)}
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    placeholder="Digete aqui o diagnóstico..."
+                                    placeholder="Digite aqui o diagnóstico..."
                                 ></textarea>
                             </div>
                             <div>
-                                <label className="block text-gray-700 text-sm font-bold mb-2">Receita:</label>
+                                <label className="block text-gray-700 text-sm font-bold mb-2">Receita Médica:</label>
                                 <textarea
                                     value={mensagem}
                                     onChange={(e) => setMensagem(e.target.value)}
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    placeholder="Digete aqui a receita..."
+                                    placeholder="Digite aqui a receita médica..."
                                 ></textarea>
                             </div>
                             <div className="flex justify-end space-x-4 mt-6">
@@ -186,9 +199,9 @@ export default function PatientsOverview({ patients, selectedPatientId, onViewDe
                                     type="submit"
                                     className="bg-careline-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
                                 >
-                                    Salvar
+                                    Salvar Laudo
                                 </button>
-                                <button className="bg-gray-200 text-gray-800 py-2 px-4 rounded-md">Imprimir</button>
+                                <button className="bg-gray-200 text-gray-800 py-2 px-4 rounded-md">Imprimir Laudo</button>
                             </div>
                         </form>
                     </div>
@@ -198,7 +211,7 @@ export default function PatientsOverview({ patients, selectedPatientId, onViewDe
     );
 }
 
-// Helper component for information cards
+
 function InfoCard({ icon, title, description, showArrow }) {
     return (
         <div className="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between items-start">

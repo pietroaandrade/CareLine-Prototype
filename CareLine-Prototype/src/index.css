@@ -5,6 +5,8 @@
 @tailwind utilities;
 
 @theme {
-    --color-careline-blue:  #47b7ff; 
+    --color-careline-blue:  #47b7ff;
+    --color-navbar-bg: #fafafe
+  
   }
 
