@@ -1,6 +1,24 @@
-# CareLine - Prototype
+# 🏥 CareLine - Sistema de Atendimento Hospitalar
 
-CareLine é um sistema desenvolvido para melhorar o atendimento e a comunicação entre pacientes e a equipe assistencial no Hospital Sabará. O sistema têm como pricipais funcionalidades: Ver a fila de espera, mandar mensagens em tempo real, também automatiza processos como cadastro, triagem por urgência, emissão de relatórios médicos e envio de mensagens.
+CareLine é um sistema desenvolvido para melhorar o **atendimento e a comunicação** entre pacientes e a equipe assistencial no Hospital Sabará. O sistema têm como pricipais funcionalidades: Ver a fila de espera, mandar mensagens em tempo real, também automatiza processos como cadastro, triagem por urgência, emissão de relatórios médicos e envio de mensagens.
+
+## Objetivos do Projeto
+
+- Automatizar a triagem e o atendimento hospitalar (Pronto-Socorro).
+- Melhorar a experiência de pacientes e acompanhantes.
+- Otimizar o fluxo de trabalho dos profissionais de saúde.
+- Reduzir o tempo de espera e garantir organização na fila.
+
+---
+
+## Funcionalidades
+
+- Cadastro completo de pacientes com classificação de urgência.
+- Visualização da fila e sua posição.
+- Acesso ao laudo médico e receita.
+- Chamada dos pacientes com prioridade.
+- Emissão de laudos, receitas e mensagens.
+- Leitura e filtragem de pacientes.
 
 <h3 align="left">​Tecnologias Utilizadas:</h3>
 
@@ -20,38 +38,9 @@ CareLine é um sistema desenvolvido para melhorar o atendimento e a comunicaçã
 
 ###
 
-## 📋 Pré-requisitos
 
-- Node.js (versão recomendada: 18.x ou superior)
-- npm ou yarn
 
-## 🔧 Instalação
-
-1. Clone o repositório:
-```bash
-git clone [URL_DO_REPOSITÓRIO]
-```
-
-2. Instale as dependências:
-```bash
-npm install
-# ou
-yarn install
-```
-
-3. Inicie o servidor de desenvolvimento:
-```bash
-npm run dev
-# ou
-yarn dev
-```
-
-## 🛠️ Funcionalidades
-
-- [Listar as principais funcionalidades do projeto]
-
-## 👥 Equipe
-
+## Integrantes
 
 | Nome                            | RM       |
 |---------------------------------|----------|
@@ -59,4 +48,3 @@ yarn dev
 | Ícaro Henrique de Souza Calixto | RM560278 |
 | Caio Costa Beraldo              | RM560775 |
 | Victor Kenzo Mikado             | RM560057 |
-
