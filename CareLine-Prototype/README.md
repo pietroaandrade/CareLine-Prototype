@@ -48,3 +48,4 @@ CareLine é um sistema desenvolvido para melhorar o **atendimento e a comunicaç
 | Ícaro Henrique de Souza Calixto | RM560278 |
 | Caio Costa Beraldo              | RM560775 |
 | Victor Kenzo Mikado             | RM560057 |
+
